@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: UTF-8 -*-
 
+import os
 from playsound import playsound
 import speech_recognition as sr
 from aip import AipSpeech
@@ -12,18 +13,20 @@ Secret_Key = "ujsCYtPqgFn9mVk1dCj4uRna8ANEiA0O"
 
 AIclient = AipSpeech(AppID,API_Key,Secret_Key)
 
+project_path = os.path.dirname(os.path.abspath(__file__))
+
 #录制语音record.wav文件中，采样率为：16K
 def record(rate = 16000):
     r = sr.Recognizer()
     with sr.Microphone(sample_rate = rate) as source:
         print("主人，我有什么能为你服务")
         audio = r.listen(source)
-    with open("./speech controller/record.wav","wb") as f:
+    with open(project_path + "\\record.wav","wb") as f:
         f.write(audio.get_wav_data())
 
 #百度语音识别,wav -> text
 def listen():
-    with open("./speech controller/record.wav","rb") as f:
+    with open(project_path + "\\record.wav","rb") as f:
         audio_data = f.read()
         AIresult = AIclient.asr(audio_data, 'wav', 16000,{'dev_pid':1536})
         result_text = AIresult["result"][0]
@@ -38,11 +41,11 @@ def speak(text=""):
     })
 
     if not isinstance(result, dict):
-        with open('./speech controller/audio.mp3', 'wb') as f:
+        with open(project_path + '\\audio.mp3', 'wb') as f:
             f.write(result)
             f.close()
 
-    playsound('./speech controller/audio.mp3')
+    playsound(project_path + '\\audio.mp3')
 
 speech_commands = {
     '关机': 'shutdown -s -t 1',
