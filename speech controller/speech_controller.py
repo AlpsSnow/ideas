@@ -7,9 +7,9 @@ import speech_recognition as sr
 from aip import AipSpeech
 import subprocess
 
-AppID = "17679016"
-API_Key = "BUc9Nj2LEej0f3wtcLpRdHyH"
-Secret_Key = "ujsCYtPqgFn9mVk1dCj4uRna8ANEiA0O"
+AppID = "xxx"
+API_Key = "xxx"
+Secret_Key = "xxxx"
 
 AIclient = AipSpeech(AppID,API_Key,Secret_Key)
 
