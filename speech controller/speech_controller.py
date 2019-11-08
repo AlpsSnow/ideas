@@ -15,15 +15,15 @@ import json
 project_path = os.path.dirname(os.path.abspath(__file__))
 
 #百度AI平台用
-AppID = "17679016"
-API_Key = "BUc9Nj2LEej0f3wtcLpRdHyH"
-Secret_Key = "ujsCYtPqgFn9mVk1dCj4uRna8ANEiA0O"
+AppID = "xxxx"
+API_Key = "xxxx"
+Secret_Key = "xxxx"
 # 百度AI的客户端初始化
 AIclient = AipSpeech(AppID,API_Key,Secret_Key)
 
 
 #图灵机器人平台用
-turing_apikey = "d30b5f0dd0ef488fa4051d699ede7472"
+turing_apikey = "xxxx"
 turing_URL = "http://openapi.tuling123.com/openapi/api/v2"
 headers = {'Content-Type': 'application/json;charset=UTF-8'}    #调用图灵API的各个环节的编码方式均为UTF-8
 
@@ -59,7 +59,6 @@ def baiduTTS(text=""):
             f.write(result)
             f.close()
 
-
 def speak(text=""):
     # baidu TTS
     baiduTTS(text)
@@ -70,6 +69,7 @@ def speak(text=""):
     # 播放wav
     play(project_path + '\\audio.wav')
 
+# 播放wav
 def play(wavfile):
     wf = wave.open(wavfile, 'rb')
     p = pyaudio.PyAudio()
@@ -95,8 +95,10 @@ def play(wavfile):
     wf.close()
     p.terminate()
 
-# The Turing chatbot
+# 图灵机器人
 def turing_robot(text=""):
+
+    #构造图灵机器人请求数据
     data = {
         "reqType": 0,
         "perception": {
@@ -116,20 +118,21 @@ def turing_robot(text=""):
             "userId": "473767"
         }
     }
-
     data["perception"]["inputText"]["text"] = text
-    #调用图灵机器人的rest api
+
+    #调用图灵机器人的REST API
     response = requests.request("post", turing_URL, json=data, headers=headers)
     response_dict = json.loads(response.text)
 
+    #解析图灵机器人返回数据
     result = response_dict["results"][0]["values"]["text"]
     print("AI 回答: " + result)    
     return result
 
-
+#控制命令
 speech_commands = {
-    '关机': 'shutdown -s -t 1',
-    '重启': 'shutdown -r',
+    #'关机': 'shutdown -s -t 1',
+    #'重启': 'shutdown -r',
     '打开火狐浏览器': [r'C:\Program Files\Mozilla Firefox\firefox.exe',"https://cn.bing.com/"],
     '关闭火狐浏览器': 'taskkill /F /IM firefox.exe',
     '打开QQ': r'C:\Program Files (x86)\Tencent\QQ\Bin\QQScLauncher.exe',
