@@ -41,11 +41,10 @@ def baiduARS():
         audio_data = f.read()
         AIresult = AIclient.asr(audio_data, 'wav', 16000,{'dev_pid':1536})
         if AIresult["err_no"] != 0:
-            print("你的指令不识别！")
-            return  "指令不识别"
+            result_text = "指令不识别"            
+            return  result_text
 
-        result_text = AIresult["result"][0]
-        print("你的指令是："+ result_text)
+        result_text = AIresult["result"][0]        
         return result_text
 
 #百度语音合成，text -> mp3
@@ -64,10 +63,12 @@ def speak(text=""):
     baiduTTS(text)
 
     # ffmpeg.exe: mp3->wav
-    os.system('ffmpeg.exe -i audio.mp3 -f wav audio.wav -y')    
+    os.system('start /MIN /WAIT ffmpeg.exe -i audio.mp3 -f wav audio.wav -y')    
 
     # 播放wav
     play(project_path + '\\audio.wav')
+    
+    print(text)
 
 # 播放wav
 def play(wavfile):
@@ -140,19 +141,24 @@ speech_commands = {
 }
 
 if __name__ == "__main__":
-    speak("欢迎使用智能语音控制系统")
+    print("robot:",end = "")
+    speak("欢迎使用智能语音控制系统:")
     while True:
-        speak("请问您想要什么服务")
-        record()
-        command = baiduARS()
-        if command in speech_commands.keys():
-            subprocess.Popen(speech_commands[command])
-            speak("正在执行"+command+"任务")
-        elif command == "退出系统":
-            speak("再见")
-            exit()
-        elif command == "指令不识别":
+        print("robot:",end = "")
+        speak("请问您想要什么服务?")
+        record() #录制语音
+        command = baiduARS() #语音识别
+        if command == "指令不识别":
+            speak("抱歉，识别不了您的指令")
             pass
         else:
-            robot_resutl = turing_robot(command)
-            speak(robot_resutl)
+            print("你的指令是：{0}".format(command))        
+            if command in speech_commands.keys():
+                subprocess.Popen(speech_commands[command]) #执行控制命令
+                speak("正在执行 "+command+" 任务")
+            elif command == "退出系统":
+                speak("再见")
+                exit()       
+            else:
+                NLP_resutl = turing_robot(command) #图灵机器人做自然语音处理，聊天
+                speak(NLP_resutl)
