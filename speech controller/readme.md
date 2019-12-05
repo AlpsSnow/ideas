@@ -4,11 +4,13 @@
 3. 将 `ffmpeg.exe` 的路径添加到系统环境变量 `PATH` 中  
 3. python speech_controller.py  
 
-### 只能语音简介
+### 智能语音简介
 #### 概要
 人工智能的关键技术均以实现感知智能和认知智能为目标。
 
 语音识别、图像识别和机器人视觉、生物识别等目前最火热的领域，主要解决的是感知智能的需求，就是使得人工智能能够感知周围的世界，能够“听见”或者“看到”。
+
+智能语音主要包括三个模块：自动语音识别技术（automatic speech recognition），自然语言处理 (Natural Language Processing)，文本转语音 (text to speech)
 
 语音交换流程图：
 ![智能语音](智能语音.png)

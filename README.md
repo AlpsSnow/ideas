@@ -11,3 +11,7 @@ timeout = 6000
 index-url = http://mirrors.aliyun.com/pypi/simple/
 trusted-host = mirrors.aliyun.com
 ```
+
+### idea列表
+1. [智能语音](./speech&#32;controller/readme.md)
+2. [使用vscode调试ruby](./ruby/readme.md)
