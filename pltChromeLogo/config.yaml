@@ -1,0 +1,5 @@
+colors: [
+        ['red', 'green', 'yellow', 'blue'],
+        ['#2976bb', '#75bbfd', '#a2cffe', '#1e90ff'],
+        ['#cb9d06', '#fac205', '#f4d054', '#f5bf03']
+      ]

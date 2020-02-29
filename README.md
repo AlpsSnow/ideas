@@ -15,3 +15,6 @@ trusted-host = mirrors.aliyun.com
 ### idea列表
 1. [智能语音](./speech&#32;controller/readme.md)
 2. [使用vscode调试ruby](./ruby/readme.md)
+3. [定时自动给QQ群发送消息](./sendqqmsg/readme.md)
+4. [读取银行回执单](./readreceipt/readme.md)
+5. [用matplotlib画Chrome浏览器logo](./pltChromeLogo/readme.md)

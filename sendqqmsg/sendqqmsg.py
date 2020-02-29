@@ -71,6 +71,7 @@ def send_qq(to_who, msg_type, data):
     win32gui.SendMessage(qq, win32con.WM_KEYDOWN, win32con.VK_RETURN, 0)
     win32gui.SendMessage(qq, win32con.WM_KEYUP, win32con.VK_RETURN, 0)
 
+# 解析yaml文件
 def getConf():
     curPath = os.path.dirname(os.path.realpath(__file__))
     yamlPath = os.path.join(curPath,'qqmsg.yaml')
